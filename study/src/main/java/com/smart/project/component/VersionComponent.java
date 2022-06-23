@@ -9,12 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**********************************************************************************************
- * @Method 설명 : Version 컴포넌트
- * @작성일 : 2021-03-23
- * @작성자 : 김남현
- * @변경이력 :
- **********************************************************************************************/
 @Slf4j
 @Component
 public class VersionComponent {
