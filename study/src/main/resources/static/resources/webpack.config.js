@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const ontext = path.join(__dirname, '');
+const context = path.join(__dirname, '');
 
 
 module.exports = {
