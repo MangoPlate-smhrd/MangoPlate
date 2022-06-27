@@ -1,0 +1,86 @@
+﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- list Table Create SQL
+CREATE TABLE list
+(
+    `list_num`    INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '맛집리스트 번호', 
+    `list_name`   VARCHAR(300)    NOT NULL    COMMENT '맛집리스트 이름', 
+    `list_intro`  VARCHAR(300)    NOT NULL    COMMENT '맛집리스트 설명', 
+     PRIMARY KEY (list_num)
+);
+
+ALTER TABLE list COMMENT '맛집리스트';
+
+
+-- place Table Create SQL
+CREATE TABLE place
+(
+    `place_num`        INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '맛집 번호', 
+    `place_name`       VARCHAR(300)    NOT NULL    COMMENT '맛집 이름', 
+    `place_addr`       VARCHAR(300)    NOT NULL    COMMENT '맛집 주소', 
+    `place_phone`      VARCHAR(300)    NOT NULL    COMMENT '맛집 전화번호', 
+    `place_parking`    CHAR(1)         NOT NULL    COMMENT '맛집 주차', 
+    `place_menu`       INT             NOT NULL    COMMENT '맛집 메뉴', 
+    `place_mainImage`  VARCHAR(60)     NOT NULL    COMMENT '맛집 대표이미지', 
+    `place_subImage`   INT             NOT NULL    COMMENT '맛집 서브이미지', 
+    `list_num`         INT UNSIGNED    NULL        COMMENT '맛집리스트 번호', 
+     PRIMARY KEY (place_num)
+);
+
+ALTER TABLE place COMMENT '맛집';
+
+ALTER TABLE place
+    ADD CONSTRAINT FK_place_list_num_list_list_num FOREIGN KEY (list_num)
+        REFERENCES list (list_num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- image Table Create SQL
+CREATE TABLE image
+(
+    `place_subImage`  INT             NOT NULL    AUTO_INCREMENT COMMENT '맛집 서브이미지', 
+    `image_name`      VARCHAR(30)     NOT NULL    COMMENT '이미지 이름', 
+    `image_path`      VARCHAR(300)    NOT NULL    COMMENT '이미지 경로', 
+    `image_folder`    VARCHAR(300)    NOT NULL    COMMENT '이미지 폴더', 
+    `place_num`       INT UNSIGNED    NOT NULL    COMMENT '맛집 번호', 
+     PRIMARY KEY (place_subImage)
+);
+
+ALTER TABLE image COMMENT '맛집 서브이미지';
+
+ALTER TABLE image
+    ADD CONSTRAINT FK_image_place_num_place_place_num FOREIGN KEY (place_num)
+        REFERENCES place (place_num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- menu Table Create SQL
+CREATE TABLE menu
+(
+    `place_menu`  INT             NOT NULL    AUTO_INCREMENT COMMENT '맛집 메뉴', 
+    `menu_name`   VARCHAR(300)    NOT NULL    COMMENT '메뉴 이름', 
+    `menu_price`  INT             NOT NULL    COMMENT '메뉴 가격', 
+    `place_num`   INT UNSIGNED    NOT NULL    COMMENT '맛집 번호', 
+     PRIMARY KEY (place_menu)
+);
+
+ALTER TABLE menu COMMENT '맛집 메뉴';
+
+ALTER TABLE menu
+    ADD CONSTRAINT FK_menu_place_num_place_place_num FOREIGN KEY (place_num)
+        REFERENCES place (place_num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- user Table Create SQL
+CREATE TABLE user
+(
+    `user_num`      INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '유저 번호', 
+    `user_id`       VARCHAR(30)     NOT NULL    COMMENT '유저 아이디', 
+    `user_pw`       VARCHAR(30)     NOT NULL    COMMENT '유저 비밀번호', 
+    `user_name`     VARCHAR(30)     NOT NULL    COMMENT '유저 이름', 
+    `user_signUp`   VARCHAR(300)    NOT NULL    COMMENT '유저 가입일자', 
+    `user_manager`  CHAR(1)         NOT NULL    COMMENT '유저 관리자식별', 
+     PRIMARY KEY (user_num)
+);
+
+ALTER TABLE user COMMENT '유저';
+
+
