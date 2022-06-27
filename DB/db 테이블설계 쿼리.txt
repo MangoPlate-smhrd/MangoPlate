@@ -1,7 +1,7 @@
 ﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
--- 맛집리스트 Table Create SQL
-CREATE TABLE 맛집리스트
+-- list Table Create SQL
+CREATE TABLE list
 (
     `list_num`    INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '맛집리스트 번호', 
     `list_name`   VARCHAR(300)    NOT NULL    COMMENT '맛집리스트 이름', 
@@ -9,11 +9,11 @@ CREATE TABLE 맛집리스트
      PRIMARY KEY (list_num)
 );
 
-ALTER TABLE 맛집리스트 COMMENT 'list';
+ALTER TABLE list COMMENT '맛집리스트';
 
 
--- 맛집 Table Create SQL
-CREATE TABLE 맛집
+-- place Table Create SQL
+CREATE TABLE place
 (
     `place_num`        INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '맛집 번호', 
     `place_name`       VARCHAR(300)    NOT NULL    COMMENT '맛집 이름', 
@@ -27,15 +27,15 @@ CREATE TABLE 맛집
      PRIMARY KEY (place_num)
 );
 
-ALTER TABLE 맛집 COMMENT 'place';
+ALTER TABLE place COMMENT '맛집';
 
-ALTER TABLE 맛집
-    ADD CONSTRAINT FK_맛집_list_num_맛집리스트_list_num FOREIGN KEY (list_num)
-        REFERENCES 맛집리스트 (list_num) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE place
+    ADD CONSTRAINT FK_place_list_num_list_list_num FOREIGN KEY (list_num)
+        REFERENCES list (list_num) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
--- 이미지 Table Create SQL
-CREATE TABLE 이미지
+-- image Table Create SQL
+CREATE TABLE image
 (
     `image_num`       INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '이미지 번호', 
     `image_name`      VARCHAR(30)     NOT NULL    COMMENT '이미지 이름', 
@@ -46,15 +46,15 @@ CREATE TABLE 이미지
      PRIMARY KEY (image_num)
 );
 
-ALTER TABLE 이미지 COMMENT 'image';
+ALTER TABLE image COMMENT '맛집 서브이미지';
 
-ALTER TABLE 이미지
-    ADD CONSTRAINT FK_이미지_place_subImage_맛집_place_subImage FOREIGN KEY (place_subImage)
-        REFERENCES 맛집 (place_subImage) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE image
+    ADD CONSTRAINT FK_image_place_subImage_place_place_subImage FOREIGN KEY (place_subImage)
+        REFERENCES place (place_subImage) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
--- 메뉴 Table Create SQL
-CREATE TABLE 메뉴
+-- menu Table Create SQL
+CREATE TABLE menu
 (
     `menu_num`    INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '메뉴 번호', 
     `menu_name`   VARCHAR(300)    NOT NULL    COMMENT '메뉴 이름', 
@@ -63,15 +63,15 @@ CREATE TABLE 메뉴
      PRIMARY KEY (menu_num)
 );
 
-ALTER TABLE 메뉴 COMMENT 'menu';
+ALTER TABLE menu COMMENT '맛집 메뉴';
 
-ALTER TABLE 메뉴
-    ADD CONSTRAINT FK_메뉴_place_menu_맛집_place_menu FOREIGN KEY (place_menu)
-        REFERENCES 맛집 (place_menu) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE menu
+    ADD CONSTRAINT FK_menu_place_menu_place_place_menu FOREIGN KEY (place_menu)
+        REFERENCES place (place_menu) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
--- 유저 Table Create SQL
-CREATE TABLE 유저
+-- user Table Create SQL
+CREATE TABLE user
 (
     `user_num`      INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '유저 번호', 
     `user_id`       VARCHAR(30)     NOT NULL    COMMENT '유저 아이디', 
@@ -82,6 +82,6 @@ CREATE TABLE 유저
      PRIMARY KEY (user_num)
 );
 
-ALTER TABLE 유저 COMMENT 'user';
+ALTER TABLE user COMMENT '유저';
 
 
