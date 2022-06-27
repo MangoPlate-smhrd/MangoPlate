@@ -1,5 +1,8 @@
 package com.smart.project.web.vo;
 
+import lombok.Data;
+
+@Data
 public class Place {
     private int place_num;
     private String place_name;
