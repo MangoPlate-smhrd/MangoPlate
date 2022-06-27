@@ -20,9 +20,7 @@ CREATE TABLE place
     `place_addr`       VARCHAR(300)    NOT NULL    COMMENT '맛집 주소', 
     `place_phone`      VARCHAR(300)    NOT NULL    COMMENT '맛집 전화번호', 
     `place_parking`    CHAR(1)         NOT NULL    COMMENT '맛집 주차', 
-    `place_menu`       INT             NOT NULL    COMMENT '맛집 메뉴', 
     `place_mainImage`  VARCHAR(60)     NOT NULL    COMMENT '맛집 대표이미지', 
-    `place_subImage`   INT             NOT NULL    COMMENT '맛집 서브이미지', 
     `list_num`         INT UNSIGNED    NULL        COMMENT '맛집리스트 번호', 
      PRIMARY KEY (place_num)
 );
