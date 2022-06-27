@@ -35,15 +35,15 @@ ALTER TABLE place
 -- image Table Create SQL
 CREATE TABLE image
 (
-    `place_subImage`  INT             NOT NULL    AUTO_INCREMENT COMMENT '맛집 서브이미지', 
-    `image_name`      VARCHAR(30)     NOT NULL    COMMENT '이미지 이름', 
-    `image_path`      VARCHAR(300)    NOT NULL    COMMENT '이미지 경로', 
-    `image_folder`    VARCHAR(300)    NOT NULL    COMMENT '이미지 폴더', 
-    `place_num`       INT UNSIGNED    NOT NULL    COMMENT '맛집 번호', 
-     PRIMARY KEY (place_subImage)
+    `image_num`     INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '이미지 번호', 
+    `image_name`    VARCHAR(30)     NOT NULL    COMMENT '이미지 이름', 
+    `image_path`    VARCHAR(300)    NOT NULL    COMMENT '이미지 경로', 
+    `image_folder`  VARCHAR(300)    NOT NULL    COMMENT '이미지 폴더', 
+    `place_num`     INT UNSIGNED    NOT NULL    COMMENT '맛집 번호', 
+     PRIMARY KEY (image_num)
 );
 
-ALTER TABLE image COMMENT '맛집 서브이미지';
+ALTER TABLE image COMMENT '이미지';
 
 ALTER TABLE image
     ADD CONSTRAINT FK_image_place_num_place_place_num FOREIGN KEY (place_num)
@@ -53,14 +53,14 @@ ALTER TABLE image
 -- menu Table Create SQL
 CREATE TABLE menu
 (
-    `place_menu`  INT             NOT NULL    AUTO_INCREMENT COMMENT '맛집 메뉴', 
+    `menu_num`    INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '메뉴 번호', 
     `menu_name`   VARCHAR(300)    NOT NULL    COMMENT '메뉴 이름', 
     `menu_price`  INT             NOT NULL    COMMENT '메뉴 가격', 
     `place_num`   INT UNSIGNED    NOT NULL    COMMENT '맛집 번호', 
-     PRIMARY KEY (place_menu)
+     PRIMARY KEY (menu_num)
 );
 
-ALTER TABLE menu COMMENT '맛집 메뉴';
+ALTER TABLE menu COMMENT '메뉴';
 
 ALTER TABLE menu
     ADD CONSTRAINT FK_menu_place_num_place_place_num FOREIGN KEY (place_num)
