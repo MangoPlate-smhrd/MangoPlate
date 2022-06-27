@@ -100,10 +100,12 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(cookieFilter())
                 .addPathPatterns("/**")
-                .addPathPatterns("/image")
                 // excludePathPatterns 묶어서 가독성 신경점..
                 .excludePathPatterns(
+                        "",
+                        "/",
                         /* 멤버 */
+
                         "/member/**",
                         "/member/login/**",
                         /* 정적 자원 */

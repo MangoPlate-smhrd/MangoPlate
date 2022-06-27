@@ -10,25 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class HomeAct {
 
-    @RequestMapping("/index")
-    public void index() {
-
+    @RequestMapping("/")
+    public String index() {
+        return "index";
     }
-
-    @RequestMapping("/generic")
-    public void test() {
-
-    }
-    @RequestMapping("/main")
-    public void main() {
-
-    }
-
-    @RequestMapping("/elements")
-    public void elements() {
-
-    }
-
 
 
 
