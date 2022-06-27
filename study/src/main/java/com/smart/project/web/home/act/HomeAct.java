@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class MangoAct {
+public class HomeAct {
 
     @RequestMapping("/index")
     public void index() {
