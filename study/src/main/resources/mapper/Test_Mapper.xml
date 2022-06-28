@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.smart.project.proc.Test" >
     <insert id="joinComplete" parameterType="com.smart.project.web.home.vo.JoinVO">
         INSERT INTO user
-        VALUES((SELECT nextval('Test') FROM DUAL), #{user_id}, #{user_pw},#{user_name},CURRENT_TIMESTAMP, 0)
+        VALUES((SELECT nextval('Test') FROM DUAL), #{userId}, #{userPw},#{userName},CURRENT_TIMESTAMP, 0)
     </insert>
 
     <select id="login" resultType="com.smart.project.web.home.vo.JoinVO" parameterType="com.smart.project.web.home.vo.JoinVO">
-        SELECT * FROM member
-        where id=#{id} and email=#{email} and pw=#{pw};
+        SELECT * FROM user
+        where user_id=#{userId} and user_pw=#{userPw}
     </select>
 
 </mapper>

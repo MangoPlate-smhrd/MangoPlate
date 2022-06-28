@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -43,7 +45,23 @@ public class MangoAct {
         int cnt = test.joinComplete(vo);
         log.error("join 성공 ==>{}", cnt+"");
 
-        return "main";
+        return "redirect:main";
+    }
+
+    @RequestMapping("/login")
+    public void login() {
+
+    }
+
+    @RequestMapping("/loginComplete")
+    public String loginComplete(JoinVO vo){
+        log.error("login data ==>{}", vo.getUserId());
+        List<JoinVO> mvo = test.login(vo);
+        log.error("login 성공 ==>{}", mvo.size());
+        log.error("login 성공 ==>{}", mvo.get(0).getUserName());
+
+
+        return "redirect:main";
     }
 
 
