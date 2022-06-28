@@ -100,7 +100,7 @@ public class CookieAutoLoginFilter implements HandlerInterceptor {
             }
             return true;
         }catch(Exception e){
-            log.info("Login checkPermission Exception...."+ e.getMessage());
+            log.info("Join checkPermission Exception...."+ e.getMessage());
             return false;
         }
     }
