@@ -1,8 +1,8 @@
 package com.smart.project.proc;
 
 import com.smart.project.annotation.Master;
-import com.smart.project.common.vo.MenuVO;
-import org.apache.ibatis.annotations.SelectProvider;
+import com.smart.project.web.vo.ListVO;
+import com.smart.project.web.vo.PlaceVO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,6 +17,9 @@ public interface Test {
 	 * @변경이력 :
 	 **********************************************************************************************/
 
+	List<ListVO> selectList();
+
+	List<PlaceVO> selectPlace(String str);
 
 
 }

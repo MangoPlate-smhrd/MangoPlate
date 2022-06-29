@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.project.proc.Test" >
 
+    <select id="selectList" resultType="com.smart.project.web.vo.ListVO">
+        select * from list;
+    </select>
+
+    <select id="selectPlace" resultType="com.smart.project.web.vo.PlaceVO">
+        select * from place where list_num in(#{str});
+    </select>
+
     <!--
     <select id="sqlMenu2" resultType="com.smart.project.web.home.vo.TestVO" parameterType="java.lang.String">
         SELECT * FROM test;

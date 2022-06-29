@@ -13,6 +13,7 @@ module.exports = {
             path.join(context, '/js/module/common/historyUtil.js')			// HistoryUtil
         ],
         sample: path.join(context, '/js/sample/sample.js'),
+        index: path.join(context, '/js/index/index.js')
     },
     devtool: 'eval',//inline-source-map, eval
     devServer: {

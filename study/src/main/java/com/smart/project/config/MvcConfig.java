@@ -102,7 +102,6 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 // excludePathPatterns 묶어서 가독성 신경점..
                 .excludePathPatterns(
-                        "",
                         "/",
                         /* 멤버 */
 

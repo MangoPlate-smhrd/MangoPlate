@@ -87,7 +87,7 @@ public class CookieAutoLoginFilter implements HandlerInterceptor {
             boolean isLogin = checkLogin(request);
             String accessUrl = request.getRequestURI();
             log.error(accessUrl);
-            log.error("check");
+            log.error("checkUrlPermission");
 
             //* 접근 제한 링크
             if(!checkNoLoginAccess(accessUrl)) {
@@ -117,7 +117,7 @@ public class CookieAutoLoginFilter implements HandlerInterceptor {
             Map<String, String> cookieMap = ClientUtil.getCurrentCookie(request);
             String id = cookieMap.get("id");
 //            cookieMap.get()
-            log.error("check"+id);
+            log.error("check id : "+id);
 //            String USER_ID = cookieMap.get("USER_ID");
 
 //            return (StringUtils.isNotEmpty(USER_ID));
