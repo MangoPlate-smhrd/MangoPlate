@@ -12,4 +12,12 @@
         where user_id=#{userId} and user_pw=#{userPw}
     </select>
 
+    <select id="selectList" resultType="com.smart.project.web.vo.ListVO">
+        select * from list;
+    </select>
+
+    <select id="selectPlace" resultType="com.smart.project.web.vo.PlaceVO">
+        select * from place where list_num in(#{str});
+    </select>
+
 </mapper>
