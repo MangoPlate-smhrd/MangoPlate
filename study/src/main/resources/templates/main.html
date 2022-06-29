@@ -4,7 +4,10 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head>
 		<title>Massively by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -33,7 +36,8 @@
 						</ul>
 						<ul class="icons">
 							<li><a href="join">Join</a></li>
-							<li><a href="login">Login</a></li>
+							<li th:if="${login == null}"><a th:href="login">Login</a></li>
+							<li th:if="${login != null}"><a th:href="logout">Logout</a></li>
 							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
@@ -54,7 +58,7 @@
 									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
 									amet nullam sed etiam veroeros.</p>
 								</header>
-								<a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a>
+								<a href="#" class="image main"><img src="/assets/css/images/pic01.jpg" alt="" /></a>
 								<ul class="actions special">
 									<li><a href="#" class="button large">Full Story</a></li>
 								</ul>
