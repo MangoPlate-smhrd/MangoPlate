@@ -1,21 +1,22 @@
 package com.smart.project.web.home.vo;
 
 import lombok.*;
+import org.springframework.context.annotation.Primary;
+
+import javax.annotation.Generated;
 
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class JoinVO {
+    int userNum;
     @NonNull
-    String id;
+    String userId;
     @NonNull
-    String email;
-    @NonNull
-    String pw;
-    String nick;
-    String gender;
-    String birth;
-    String locWantKey;
-    String wantLoc;
+    String userPw;
+    String userName;
+    String userSignUp;
+    String userManager;
+
 }
