@@ -19,15 +19,9 @@ public interface Test {
 	 * @작성자 : 김남현
 	 * @변경이력 :
 	 **********************************************************************************************/
-	List<TestVO> sqlMenu2(String userId);
-
-	List<StudyTestVO> sqlFind();
-
 	int joinComplete(JoinVO vo);
 
-	List<JoinVO> memberFind();
-
-	List<JoinVO> login(JoinVO vo);
+	JoinVO login(JoinVO vo);
 
 
 }
