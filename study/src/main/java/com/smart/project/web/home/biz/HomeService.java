@@ -22,7 +22,5 @@ public class HomeService {
         return vo;
     }
 
-    public List<PlaceVO> selectPlace(String num){
 
-    }
 }

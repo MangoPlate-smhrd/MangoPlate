@@ -12,8 +12,7 @@ module.exports = {
             path.join(context, '/js/module/common/socketReceive.js'),		// 소켓
             path.join(context, '/js/module/common/historyUtil.js')			// HistoryUtil
         ],
-        sample: path.join(context, '/js/sample/sample.js'),
-        index: path.join(context, '/js/index/index.js')
+        sample: path.join(context, '/js/sample/sample.js')
     },
     devtool: 'eval',//inline-source-map, eval
     devServer: {
