@@ -5,6 +5,8 @@ import com.smart.project.common.vo.MenuVO;
 import com.smart.project.web.home.vo.JoinVO;
 import com.smart.project.web.home.vo.StudyTestVO;
 import com.smart.project.web.home.vo.TestVO;
+import com.smart.project.web.vo.ListVO;
+import com.smart.project.web.vo.PlaceVO;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,10 @@ public interface Test {
 	int joinComplete(JoinVO vo);
 
 	JoinVO login(JoinVO vo);
+
+	List<ListVO> selectList();
+
+	List<PlaceVO> selectPlace(String str);
 
 
 }

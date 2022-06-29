@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layoutContents.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/blog/">
+
+
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content" class="pc__container">
+    <div th:replace="/fragments/header :: header"></div>
+    <main>
+        <section class="py-3 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">스터디 테스123트</h1>
+                    <p class="lead text-muted">mango plate 모방 스터디 입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <a th:href="@{/product}">
+                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                <div class="col-auto d-none d-lg-block">
+                                    <img style="width: 100%" th:src="@{/image/img1.jpg}"/>
+                                </div>
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <strong class="d-inline-block mb-2 text-primary">World</strong>
+                                    <h3 class="mb-0">Featured post</h3>
+                                    <div class="mb-1 text-muted">Nov 12</div>
+                                    <p class="card-text mb-auto">This is a wider card with supporting text below as a
+                                        natural lead-in to additional content.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col-auto d-none d-lg-block">
+                                <img style="width: 100%" th:src="@{/image/img1.jpg}"/></div>
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary">World</strong>
+                                <h3 class="mb-0">Featured post</h3>
+                                <div class="mb-1 text-muted">Nov 12</div>
+                                <p class="card-text mb-auto">This is a wider card with supporting text below as a
+                                    natural lead-in to additional content.</p>
+                                <a href="#" class="stretched-link">Continue reading</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layoutContents.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content" class="pc__container">
+    <div th:replace="/fragments/header :: header"></div>
+
+    <div class="card-group">
+        <div class="card">
+            <img th:src="@{/image/img1.jpg}" class="card-img-top" alt="...">
+        </div>
+        <div class="card">
+            <img th:src="@{/image/img1.jpg}" class="card-img-top" alt="...">
+        </div>
+        <div class="card">
+            <img th:src="@{/image/img1.jpg}" class="card-img-top" alt="...">
+        </div>
+    </div>
+
+    <section class="col-8">
+        <table class="table table-borderless">
+            <thead>
+            <tr>
+                <th scope="col" colspan="2">이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row" class="col-2">주소</th>
+                <td>Mark</td>
+            </tr>
+            <tr>
+                <th scope="row">전화번호</th>
+                <td>Jacob</td>
+            </tr>
+            <tr>
+                <th scope="row">주차여부</th>
+                <td>123</td>
+            </tr>
+            <tr>
+                <th scope="row">메뉴</th>
+                <td>123</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+</div>
+</body>
+</html>
