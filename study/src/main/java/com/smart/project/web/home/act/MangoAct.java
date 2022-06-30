@@ -55,7 +55,7 @@ public class MangoAct {
         int cnt = test.joinComplete(vo);
         log.error("join 성공 ==>{}", cnt+"");
 
-        return "redirect:main";
+        return "redirect:index";
     }
 
     @RequestMapping("/login")
@@ -68,7 +68,7 @@ public class MangoAct {
 
         CookieUtil.deleteCookie(request, response, "id");
 
-        return "redirect:main";
+        return "redirect:index";
 
     }
 
@@ -87,7 +87,7 @@ public class MangoAct {
                 return "redirect:admin";
             }
 
-            return "redirect:main";
+            return "redirect:index";
         } else {
             log.error("로그인 실패");
             return "redirect:login";
