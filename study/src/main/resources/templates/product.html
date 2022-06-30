@@ -28,21 +28,21 @@
         <table class="table table-borderless">
             <thead>
             <tr>
-                <th scope="col" colspan="2">이름</th>
+                <th th:text="${place.getPlaceName()}" scope="col" colspan="2">이름</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <th scope="row" class="col-2">주소</th>
-                <td>Mark</td>
+                <td th:text="${place.getPlaceAddr()}">Mark</td>
             </tr>
             <tr>
                 <th scope="row">전화번호</th>
-                <td>Jacob</td>
+                <td th:text="${place.getPlacePhone()}">Jacob</td>
             </tr>
             <tr>
                 <th scope="row">주차여부</th>
-                <td>123</td>
+                <td th:text="${place.getPlaceParking()}">123</td>
             </tr>
             <tr>
                 <th scope="row">메뉴</th>

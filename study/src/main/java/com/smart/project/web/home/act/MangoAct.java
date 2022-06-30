@@ -37,7 +37,6 @@ public class MangoAct {
         List<ListVO> lists = homeService.selectList();
         model.addAttribute("list", lists);
         log.error("homePage");
-
         Map<String, String> cookieMap = ClientUtil.getCurrentCookie(request);
         String id = cookieMap.get("id");
         log.error("main id ==> {}", id);
@@ -80,6 +79,7 @@ public class MangoAct {
         if (mvo.getUserId() != null){
             log.error("로그인 성공");
             CookieUtil.createCookie(res, "id", mvo.getUserId());
+
 
             if (mvo.getUserManager().equals("1")){
                 // UserManager가 1인 경우 = 관리자

@@ -27,7 +27,8 @@ public interface Test {
 
 	List<ListVO> selectList();
 
-	List<PlaceVO> selectPlace(String str);
+	List<PlaceVO> selectAllPlace(int num);
+	PlaceVO selectPlace(int num);
 
 
 }

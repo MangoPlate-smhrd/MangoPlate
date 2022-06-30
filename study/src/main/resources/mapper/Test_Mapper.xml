@@ -16,8 +16,12 @@
         select * from list;
     </select>
 
+    <select id="selectAllPlace" resultType="com.smart.project.web.vo.PlaceVO">
+        select * from place where list_num in(#{num});
+    </select>
+
     <select id="selectPlace" resultType="com.smart.project.web.vo.PlaceVO">
-        select * from place where list_num in(#{str});
+        select * from place where place_num in(#{num});
     </select>
 
 </mapper>

@@ -38,13 +38,14 @@
             <div class="container">
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div th:each="list : ${list}" class="col">
+                    <div th:each="list : ${lists}" class="col">
                         <div class="card shadow-sm">
-                            <a th:href="@{/lists/{param1}(param1=${list.getListName()}, param=${list.getListNum()})}">
+                            <a th:href="@{/lists/{param}(param=${list.getListNum()})}">
                                 <div class="card-body">
-                                    <img style="width: 100%" th:src="@{/image/img1.jpg}"/>
+                                    <img style="width: 100%" th:src="@{${list.getListImg()}}"/>
                                     <p class="card-text" th:text="${list.getListName()}">This content is a little bit
                                         longer.</p>
+                                    <span th:text="${list.getListIntro()}"></span>
                                 </div>
                             </a>
                         </div>
