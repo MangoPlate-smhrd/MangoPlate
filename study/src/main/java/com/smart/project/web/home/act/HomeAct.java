@@ -1,5 +1,6 @@
 package com.smart.project.web.home.act;
 
+import com.smart.project.util.ClientUtil;
 import com.smart.project.web.home.biz.HomeService;
 import com.smart.project.web.vo.ListVO;
 import com.smart.project.web.vo.PlaceVO;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -21,10 +23,17 @@ public class HomeAct {
     private final HomeService homeService;
 
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request) throws Exception {
         List<ListVO> lists = homeService.selectList();
         model.addAttribute("lists", lists);
         log.error("homePage");
+
+        Map<String, String> cookieMap = ClientUtil.getCurrentCookie(request);
+        String id = cookieMap.get("id");
+        log.error("main id ==> {}", id);
+
+        model.addAttribute("login", id);
+
         return "index";
     }
 
