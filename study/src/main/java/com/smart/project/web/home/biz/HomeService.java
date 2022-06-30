@@ -13,12 +13,20 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class HomeService {
-
     private final Test test;
-
 
     public List<ListVO> selectList(){
         List<ListVO> vo = test.selectList();
+        return vo;
+    }
+
+    public List<PlaceVO> selectAllPlace(int num){
+        List<PlaceVO> vo = test.selectAllPlace(num);
+        return vo;
+    }
+
+    public PlaceVO selectPlace(int num){
+        PlaceVO vo = test.selectPlace(num);
         return vo;
     }
 
