@@ -37,6 +37,8 @@
                 </svg>
                 <strong>Album</strong>
             </a>
+            <span th:if="${login == null}"><a th:href="login" th:text="LOGIN" class="navbar-brand d-flex align-items-center" style="margin-left: 1000px; color: white;">LOGIN</a></span>
+            <span th:if="${login != null}"><a th:href="logout" th:text="LOGOUT" class="navbar-brand d-flex align-items-center" style="margin-left: 1000px; color: white;">LOGOUT</a></span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

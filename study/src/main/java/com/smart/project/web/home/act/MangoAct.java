@@ -3,7 +3,9 @@ package com.smart.project.web.home.act;
 import com.smart.project.proc.Test;
 import com.smart.project.util.ClientUtil;
 import com.smart.project.util.CookieUtil;
+import com.smart.project.web.home.biz.HomeService;
 import com.smart.project.web.home.vo.JoinVO;
+import com.smart.project.web.vo.ListVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -21,28 +25,24 @@ import java.util.Map;
 public class MangoAct {
 
     public final Test test;
+    private final HomeService homeService;
 
     @RequestMapping("/index")
     public void index() {
 
     }
 
-    @RequestMapping("/generic")
-    public void test() {
-
-    }
     @RequestMapping("/main")
     public void main(HttpServletRequest request, Model model) throws Exception {
+        List<ListVO> lists = homeService.selectList();
+        model.addAttribute("list", lists);
+        log.error("homePage");
+
         Map<String, String> cookieMap = ClientUtil.getCurrentCookie(request);
         String id = cookieMap.get("id");
         log.error("main id ==> {}", id);
 
         model.addAttribute("login", id);
-
-    }
-
-    @RequestMapping("/elements")
-    public void elements() {
 
     }
 
@@ -97,6 +97,10 @@ public class MangoAct {
 
     @RequestMapping("/admin")
     public void admin(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Calendar c1 = Calendar.getInstance();
+        String strToday = sdf.format(c1.getTime());
+        log.error("Today={}",strToday);
 
     }
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <ul>
+        <li>카테고리 <select name="category">
+            <option value="">선택</option>
+            <th:block th:each="row : ${list}">
+            <option th:value="${row.getListName()}" th:text="${row.getListName()}"></option>
+            </th:block>
+        </select> </li>
+        <li>이미지 파일 <input type="file" name="file" ></li>
+        <li><input type="submit"/></li>
+    </ul>
+    
+</form>
+</body>
+</html>
