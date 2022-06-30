@@ -1,5 +1,6 @@
 package com.smart.project.web.home.act;
 
+import com.smart.project.common.vo.InternCookie;
 import com.smart.project.proc.Test;
 import com.smart.project.util.ClientUtil;
 import com.smart.project.util.CookieUtil;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
@@ -33,12 +35,13 @@ public class MangoAct {
     }
 
     @RequestMapping("/main")
-    public void main(HttpServletRequest request, Model model) throws Exception {
+    public void main(HttpServletRequest request, Model model, InternCookie internCookie) throws Exception {
         List<ListVO> lists = homeService.selectList();
         model.addAttribute("list", lists);
         log.error("homePage");
         Map<String, String> cookieMap = ClientUtil.getCurrentCookie(request);
         String id = cookieMap.get("id");
+
         log.error("main id ==> {}", id);
 
         model.addAttribute("login", id);
@@ -67,7 +70,17 @@ public class MangoAct {
     public String logout(HttpServletRequest request, HttpServletResponse response){
 
         CookieUtil.deleteCookie(request, response, "id");
+        Cookie[] cookies = request.getCookies(); // 모든 쿠키의 정보를 cookies에 저장
 
+        if(cookies != null){ // 쿠키가 한개라도 있으면 실행
+
+            for(int i=0; i< cookies.length; i++) {
+
+                cookies[i].setMaxAge(0); // 유효시간을 0으로 설정
+
+                response.addCookie(cookies[i]); // 응답 헤더에 추가
+            }
+        }
         return "redirect:/";
 
     }

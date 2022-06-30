@@ -33,14 +33,12 @@ public class PhotoAct {
 
 
     @RequestMapping("/upload")
-    public String saveFile(@RequestParam("file") MultipartFile file ,HttpServletRequest request) throws Exception {
+    public String saveFile(@RequestParam("file") MultipartFile file, @RequestParam("category") String sel, HttpServletRequest request) throws Exception {
 
         log.error("file name : " + file.getOriginalFilename());
         log.error("file size : " + file.getSize());
 
-        Map<String, String> cookieMap = ClientUtil.getCurrentCookie(request);
-        String id = cookieMap.get("id");
-        String path = "/mango/" + id + "/"; // 경로설정
+        String path = "/mango/" + sel + "/"; // 경로설정
         File Folder = new File(path);
 
         if (!Folder.exists()) {
@@ -79,7 +77,9 @@ public class PhotoAct {
     }
 
     @RequestMapping("/photo")
-    public void photo(){
+    public void photo(Model model){
+        List<ListVO> listVOS = homeService.selectList();
+        model.addAttribute("list", listVOS);
     }
 
     @RequestMapping("/show")
