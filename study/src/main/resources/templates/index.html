@@ -42,7 +42,7 @@
                         <div class="card shadow-sm">
                             <a th:href="@{/lists/{param}(param=${list.getListNum()})}">
                                 <div class="card-body">
-                                    <img style="width: 100%" th:src="@{${list.getListImg()}}"/>
+                                    <img style="width: 100%" th:src="@{${list.getMainImageName()}}"/>
                                     <p class="card-text" th:text="${list.getListName()}">This content is a little bit
                                         longer.</p>
                                     <span th:text="${list.getListIntro()}"></span>

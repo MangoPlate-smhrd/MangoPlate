@@ -29,24 +29,6 @@ public class MangoAct {
     public final Test test;
     private final HomeService homeService;
 
-    @RequestMapping("/index")
-    public void index() {
-
-    }
-
-    @RequestMapping("/main")
-    public void main(HttpServletRequest request, Model model, InternCookie internCookie) throws Exception {
-        List<ListVO> lists = homeService.selectList();
-        model.addAttribute("list", lists);
-        log.error("homePage");
-        Map<String, String> cookieMap = ClientUtil.getCurrentCookie(request);
-        String id = cookieMap.get("id");
-
-        log.error("main id ==> {}", id);
-
-        model.addAttribute("login", id);
-
-    }
 
     @RequestMapping("/join")
     public void join() {

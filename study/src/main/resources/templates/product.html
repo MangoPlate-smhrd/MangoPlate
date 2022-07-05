@@ -6,6 +6,7 @@
         layout:decorate="~{layouts/layoutContents.html}">
 <head>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -23,7 +24,9 @@
             <img th:src="@{/image/img1.jpg}" class="card-img-top" alt="...">
         </div>
     </div>
-
+    <form th:object="${place}" id="infoForm" action="/product/delete" method="post">
+        <input type="hidden" th:field="*{placeNum}"/>
+    </form>
     <section class="col-8">
         <table class="table table-borderless">
             <thead>
@@ -51,6 +54,20 @@
             </tbody>
         </table>
     </section>
+    <div>
+        <a class="btn" id="product_delete">삭제</a>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function (){
+            var form = $("#infoForm");
+            $("#product_delete").on("click", function(e){
+                form.attr("action", "/product/delete");
+                form.attr("method", "post");
+                form.submit();
+            });
+        })
+    </script>
 
 </div>
 </body>

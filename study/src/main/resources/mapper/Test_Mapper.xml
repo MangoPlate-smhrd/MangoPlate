@@ -4,7 +4,7 @@
 <mapper namespace="com.smart.project.proc.Test" >
     <insert id="joinComplete" parameterType="com.smart.project.web.home.vo.JoinVO">
         INSERT INTO user
-        VALUES((SELECT nextval('Test') FROM DUAL), #{userId}, #{userPw},#{userName},CURRENT_TIMESTAMP, 0)
+        VALUES(null, #{userId}, #{userPw},#{userName},CURRENT_TIMESTAMP, 0)
     </insert>
 
     <select id="login" resultType="com.smart.project.web.home.vo.JoinVO" parameterType="com.smart.project.web.home.vo.JoinVO">
@@ -12,8 +12,8 @@
         where user_id=#{userId} and user_pw=#{userPw}
     </select>
 
-    <select id="selectList" resultType="com.smart.project.web.vo.ListVO">
-        select * from list;
+    <select id="selectAllList" resultType="com.smart.project.web.vo.ListVO">
+        select a.list_num as list_num, list_name, list_intro, mainImage_name from list a left join mainImage b on a.list_num = b.list_num;
     </select>
 
     <select id="selectAllPlace" resultType="com.smart.project.web.vo.PlaceVO">
@@ -23,5 +23,14 @@
     <select id="selectPlace" resultType="com.smart.project.web.vo.PlaceVO">
         select * from place where place_num in(#{num});
     </select>
+
+    <insert id="insertList" parameterType="com.smart.project.web.vo.ListVO">
+        insert into list values (null, #{listName}, #{listIntro}, #{listImg})
+    </insert>
+
+
+    <insert id="insertPlace" parameterType="com.smart.project.web.vo.PlaceVO">
+        insert into place values (null, #{placeName}, #{placeAddr}, #{placePhone}, #{placeParking}, #{placeMainImage}, #{listNum})
+    </insert>
 
 </mapper>
