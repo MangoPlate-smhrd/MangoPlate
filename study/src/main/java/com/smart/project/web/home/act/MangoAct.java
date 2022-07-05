@@ -5,6 +5,7 @@ import com.smart.project.proc.Test;
 import com.smart.project.util.ClientUtil;
 import com.smart.project.util.CookieUtil;
 import com.smart.project.web.home.biz.HomeService;
+import com.smart.project.web.home.biz.MemberService;
 import com.smart.project.web.home.vo.JoinVO;
 import com.smart.project.web.vo.ListVO;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +30,7 @@ public class MangoAct {
 
     public final Test test;
     private final HomeService homeService;
+    private final MemberService ms;
 
 
     @RequestMapping("/join")
@@ -98,6 +101,23 @@ public class MangoAct {
         log.error("Today={}",strToday);
 
     }
+
+    @RequestMapping("/kakaoLogin")
+    public String kakaoLogin(@RequestParam("code") String code, HttpServletResponse res) throws Exception {
+        CookieUtil.createCookie(res, "id", "kakao");
+        log.error("token==>{}", code);
+        String access_Token = ms.getAccessToken(code);
+        log.error("token2==>{}", access_Token);
+
+        HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
+        log.error("###access_Token#### : " + access_Token);
+        log.error("###nickname#### : " + userInfo.get("nickname"));
+        log.error("###email#### : " + userInfo.get("email"));
+
+        return "redirect:/";
+
+    }
+
 
 
 }
