@@ -25,10 +25,14 @@ public interface Test {
 
 	JoinVO login(JoinVO vo);
 
-	List<ListVO> selectList();
+	List<ListVO> selectAllList();
 
 	List<PlaceVO> selectAllPlace(int num);
 	PlaceVO selectPlace(int num);
+
+	void insertPlace(PlaceVO placeVO);
+
+	void insertList(ListVO listVO);
 
 
 }

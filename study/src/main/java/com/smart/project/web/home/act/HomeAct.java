@@ -24,7 +24,7 @@ public class HomeAct {
 
     @RequestMapping("/")
     public String index(Model model, HttpServletRequest request) throws Exception {
-        List<ListVO> lists = homeService.selectList();
+        List<ListVO> lists = homeService.selectAllList();
         model.addAttribute("lists", lists);
         log.error("homePage");
 
@@ -47,6 +47,8 @@ public class HomeAct {
         return "lists";
     }
 
+
+
     @RequestMapping("/product/{param}")
     public String product(@PathVariable int param,Model model, HttpServletRequest request){
         PlaceVO place = homeService.selectPlace(param);
@@ -55,6 +57,11 @@ public class HomeAct {
         log.error("lists url : {}", request.getRequestURI());
         log.error("place : {}", place);
         return "product";
+    }
+
+    @RequestMapping("/product/delete")
+    public String delete(){
+        return "redirect:/lists/83";
     }
 
 }

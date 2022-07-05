@@ -50,7 +50,6 @@ public class CookieAutoLoginFilter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         preTime = new Date().getTime();//시작시간
-        log.error("preHandle===>{}", request.getRequestURI());
         if(!checkUrlPermission(request, response)){
             String protocol = request.isSecure() ? "https://" : "http://";
 //            response.sendRedirect(protocol + request.getServerName() + "/member/login/index");

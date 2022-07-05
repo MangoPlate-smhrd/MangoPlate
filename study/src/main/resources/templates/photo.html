@@ -1,22 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layoutContents.html}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <ul>
-        <li>카테고리 <select name="category">
-            <option value="">선택</option>
-            <th:block th:each="row : ${list}">
-            <option th:value="${row.getListName()}" th:text="${row.getListName()}"></option>
-            </th:block>
-        </select> </li>
-        <li>이미지 파일 <input type="file" name="file" ></li>
-        <li><input type="submit"/></li>
-    </ul>
-    
-</form>
+<div layout:fragment="content" class="pc__container">
+    <form th:object="${place}" action="/upload" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="placeName">가게 이름</label>
+            <input type="text" th:field="*{placeName}" class="form-control" placeholder="이름을 입력하세요"/>
+        </div>
+        <div>
+            <label for="placeAddr">가게 주소</label>
+            <input type="text" th:field="*{placeAddr}" class="form-control" placeholder="주소를 입력하세요"/>
+        </div>
+        <div>
+            <label for="placePhone">가게 전화번호</label>
+            <input type="text" th:field="*{placePhone}" class="form-control" placeholder="전화번호를 입력하세요"/>
+        </div>
+        <div>
+            <label for="placeParking">가게 주차여부</label>
+            <input type="text" th:field="*{placeParking}" class="form-control"
+                   placeholder="0 : 주차 불가능 1 : 주차 가능"/>
+        </div>
+
+        <ul>
+            <li>카테고리 <select name="category">
+                <option value="">선택</option>
+                <th:block th:each="row : ${list}">
+                    <option th:value="${row.getListNum()}" th:text="${row.getListName()}"></option>
+                </th:block>
+            </select></li>
+            <li>이미지 파일 <input type="file" name="file"></li>
+            <li><input type="submit"/></li>
+        </ul>
+
+    </form>
+</div>
 </body>
 </html>

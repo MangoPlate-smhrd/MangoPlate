@@ -7,5 +7,5 @@ public class ListVO {
     private int listNum;
     private String listName;
     private String listIntro;
-    private String listImg;
+    private String mainImageName;
 }
