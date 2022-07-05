@@ -102,6 +102,11 @@ public class MangoAct {
 
     }
 
+    @RequestMapping("/kakao")
+    public String kakao(){
+        return "redirect:https://kauth.kakao.com/oauth/authorize?client_id=9b950cc68d2820a3e85047db80f55d96&redirect_uri=http://localhost/kakaoLogin&response_type=code";
+    }
+
     @RequestMapping("/kakaoLogin")
     public String kakaoLogin(@RequestParam("code") String code, HttpServletResponse res) throws Exception {
         CookieUtil.createCookie(res, "id", "kakao");
