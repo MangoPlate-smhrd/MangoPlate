@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layoutContents.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content" class="pc__container">
+    <form th:object="${lists}" name="lists" action="/manageList/insertList" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="listName">카테고리 이름</label>
+            <input type="text" th:field="*{listName}" class="form-control" placeholder="이름을 입력하세요"/>
+        </div>
+        <div>
+            <label for="listIntro">카테고리 설명</label>
+            <input type="text" th:field="*{listIntro}" class="form-control" placeholder="설명을 입력하세요"/>
+        </div>
+
+        <ul>
+            <li>이미지 파일 <input type="file" name="file"></li>
+        </ul>
+        <input th type="submit"/>
+    </form>
+</div>
+</body>
+</html>

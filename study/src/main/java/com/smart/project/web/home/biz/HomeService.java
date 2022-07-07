@@ -2,7 +2,8 @@ package com.smart.project.web.home.biz;
 
 import com.smart.project.proc.Test;
 import com.smart.project.web.vo.ListVO;
-import com.smart.project.web.vo.PlaceVO;
+import com.smart.project.web.vo.MainImageVO;
+import com.smart.project.web.vo.ProductVO;
 import javafx.scene.input.DataFormat;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,14 +32,26 @@ public class HomeService {
                         listVO.setMainImageName("/image"+path + File.separator + mainImageName);
                     }
                 }
-
             }
         }
         return vo;
     }
 
-    public List<PlaceVO> selectAllPlace(int num){
-        List<PlaceVO> vo = test.selectAllPlace(num);
+    public ListVO selectList(int num){
+        ListVO listVO = test.selectList(num);
+        if(listVO.getMainImageName() != null){
+            String mainImageName = listVO.getMainImageName();
+            if(mainImageName.split("_")[0].length() == 8){
+                String s = mainImageName.split("_")[0];
+                String path = File.separator + s.substring(0,4) + File.separator + s.substring(4, 6) + File.separator + s.substring(6, 8);
+                listVO.setMainImageName("/image"+path + File.separator + mainImageName);
+            }
+        }
+        return listVO;
+    }
+
+    public List<ProductVO> selectAllCategoryProduct(int num){
+        List<ProductVO> vo = test.selectAllCategoryProduct(num);
         return vo;
     }
 
@@ -46,10 +59,33 @@ public class HomeService {
         test.insertList(listVO);
     }
 
-    public PlaceVO selectPlace(int num){
-        PlaceVO vo = test.selectPlace(num);
+    public void insertMainImage(ListVO listVO){
+        test.insertMainImage(listVO);
+    }
+
+    public void deleteMainImage(int num){
+        test.deleteMainImage(num);
+    }
+
+    public void deleteList(int num){
+        test.deleteList(num);
+    }
+
+    public void updateList(ListVO listVO){
+        test.updateList(listVO);
+    }
+
+    public void updateMainImage(MainImageVO mainImageVO){
+        test.updateMainImage(mainImageVO);
+    }
+
+
+
+    public ProductVO selectProduct(int num){
+        ProductVO vo = test.selectProduct(num);
         return vo;
     }
+
 
 
 }

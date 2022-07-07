@@ -16,20 +16,44 @@
         select a.list_num as list_num, list_name, list_intro, mainImage_name from list a left join mainImage b on a.list_num = b.list_num;
     </select>
 
-    <select id="selectAllPlace" resultType="com.smart.project.web.vo.PlaceVO">
+    <select id="selectList" resultType="com.smart.project.web.vo.ListVO">
+        select a.list_num as list_num, list_name, list_intro, mainImage_name from list a left join mainImage b on a.list_num = b.list_num where a.list_num = #{num};
+    </select>
+
+    <select id="selectAllCategoryProduct" resultType="com.smart.project.web.vo.ProductVO">
         select * from place where list_num in(#{num});
     </select>
 
-    <select id="selectPlace" resultType="com.smart.project.web.vo.PlaceVO">
+    <select id="selectProduct" resultType="com.smart.project.web.vo.ProductVO">
         select * from place where place_num in(#{num});
     </select>
 
     <insert id="insertList" parameterType="com.smart.project.web.vo.ListVO">
-        insert into list values (null, #{listName}, #{listIntro}, #{listImg})
+        insert into list values (null, #{listName}, #{listIntro});
     </insert>
 
+    <insert id="insertMainImage" parameterType="com.smart.project.web.vo.MainImageVO">
+        insert into mainImage values (null, #{mainImageName}, (SELECT nextval('List') FROM DUAL), null);
+    </insert>
 
-    <insert id="insertPlace" parameterType="com.smart.project.web.vo.PlaceVO">
+    <delete id="deleteMainImage">
+        delete from mainImage where list_num in(#{num});
+    </delete>
+
+    <delete id="deleteList">
+        delete from list where list_num in(#{num});
+    </delete>
+
+    <update id="updateList">
+        update list set list_name = #{listName}, list_intro = #{listIntro} where list_num = #{listNum};
+    </update>
+
+    <update id="updateMainImage" parameterType="com.smart.project.web.vo.MainImageVO">
+        update mainImage set mainImage_name = #{mainImageName} where list_num = #{listNum};
+    </update>
+
+
+    <insert id="insertPlace" parameterType="com.smart.project.web.vo.ProductVO">
         insert into place values (null, #{placeName}, #{placeAddr}, #{placePhone}, #{placeParking}, #{placeMainImage}, #{listNum})
     </insert>
 

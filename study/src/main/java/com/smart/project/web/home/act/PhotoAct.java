@@ -1,12 +1,14 @@
 package com.smart.project.web.home.act;
 
+import com.smart.project.common.vo.InternCookie;
 import com.smart.project.util.ClientUtil;
+import com.smart.project.util.CookieUtil;
 import com.smart.project.util.ImageUtil;
 import com.smart.project.web.home.biz.HomeService;
 import com.smart.project.web.home.biz.PhotoService;
 import com.smart.project.web.home.biz.PlaceService;
 import com.smart.project.web.vo.ListVO;
-import com.smart.project.web.vo.PlaceVO;
+import com.smart.project.web.vo.ProductVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -43,18 +45,18 @@ public class PhotoAct {
     public String photo(Model model){
         List<ListVO> listVOS = homeService.selectAllList();
         model.addAttribute("list", listVOS);
-        model.addAttribute("place", new PlaceVO());
+        model.addAttribute("place", new ProductVO());
         return "photo";
     }
 
     @RequestMapping("/upload")
-    public String saveFile(@RequestParam("file") MultipartFile file, @RequestParam("category") int category,@ModelAttribute PlaceVO placeVO, HttpServletRequest request) throws Exception {
+    public String saveFile(@RequestParam("file") MultipartFile file, @RequestParam("category") int category,@ModelAttribute ProductVO productVO, HttpServletRequest request, InternCookie internCookie) throws Exception {
 
-        String path = photoService.savePhoto(file, "places_img");
-        placeVO.setListNum(category);
-        placeVO.setPlaceMainImage(path);
-        placeService.insertPlace(placeVO);
-        log.error("placeVO : {}", placeVO);
+        String path = photoService.savePhoto(file, internCookie);
+        productVO.setListNum(category);
+        productVO.setPlaceMainImage(path);
+        placeService.insertPlace(productVO);
+        log.error("productVO : {}", productVO);
 
         return "redirect:/admin";
     }
