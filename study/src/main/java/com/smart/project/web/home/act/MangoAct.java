@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -40,10 +42,14 @@ public class MangoAct {
 
     @RequestMapping("/joinComplete")
     public String joinComplete(@ModelAttribute JoinVO vo){
-        int cnt = test.joinComplete(vo);
-        log.error("join 성공 ==>{}", cnt+"");
+        if (vo != null) {
+            int cnt = test.joinComplete(vo);
+            log.error("join 성공 ==>{}", cnt + "");
 
-        return "redirect:/";
+            return "redirect:/";
+        } else{
+            return "redirect:/join";
+        }
     }
 
     @RequestMapping("/login")
@@ -71,20 +77,19 @@ public class MangoAct {
     }
 
     @RequestMapping("/loginComplete")
-    public String loginComplete(JoinVO vo, HttpServletResponse res){
-        JoinVO mvo = test.login(vo);
+    public String loginComplete(JoinVO vo, HttpServletResponse res) throws IOException {
 
-        if (mvo.getUserId() != null){
+
+        JoinVO mvo = test.login(vo);
+        if (mvo != null){
             log.error("로그인 성공");
             CookieUtil.createCookie(res, "id", mvo.getUserId());
-
 
             if (mvo.getUserManager().equals("1")){
                 // UserManager가 1인 경우 = 관리자
                 // UserManager가 0인 경우 = 일반 유저
                 return "redirect:admin";
             }
-
             return "redirect:/";
         } else {
             log.error("로그인 실패");

@@ -17,7 +17,6 @@ public class LoginUserCookieInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         try {
-
             Map<String, String> currentCookie = getCurrentCookie(request);
 
             if(currentCookie != null) {
