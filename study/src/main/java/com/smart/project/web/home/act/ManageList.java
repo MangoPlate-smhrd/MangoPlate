@@ -83,7 +83,9 @@ public class ManageList {
     @RequestMapping(value = "/updateMainImage", params = "mainImageNum")
     public String manageUpdateMainImage(@RequestParam("file") MultipartFile file, @RequestParam int listNum, @ModelAttribute MainImageVO mainImageVO, InternCookie internCookie){
 
-        String fileName = photoService.savePhoto(file, internCookie);
+        log.error("mainImageNum : {}", mainImageVO);
+        String selectMainImageNameListNum = homeService.selectMainImageNameListNum(listNum);
+        String fileName = photoService.updatePhoto(file, internCookie, selectMainImageNameListNum);
         mainImageVO.setMainImageName(fileName);
         mainImageVO.setListNum(listNum);
 

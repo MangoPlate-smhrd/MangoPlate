@@ -79,6 +79,11 @@ public class HomeService {
         test.updateMainImage(mainImageVO);
     }
 
+    public String selectMainImageNameListNum(int listNum){
+        MainImageVO mainImageVO = test.selectMainImageListNum(listNum);
+        return mainImageVO.getMainImageName();
+    }
+
 
 
     public ProductVO selectProduct(int num){

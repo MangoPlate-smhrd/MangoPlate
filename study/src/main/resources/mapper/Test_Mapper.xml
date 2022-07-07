@@ -52,6 +52,10 @@
         update mainImage set mainImage_name = #{mainImageName} where list_num = #{listNum};
     </update>
 
+    <select id="selectMainImageListNum" parameterType="com.smart.project.web.vo.MainImageVO" resultType="com.smart.project.web.vo.MainImageVO">
+        select * from mainImage where list_num = #{listNum};
+    </select>
+
 
     <insert id="insertPlace" parameterType="com.smart.project.web.vo.ProductVO">
         insert into place values (null, #{placeName}, #{placeAddr}, #{placePhone}, #{placeParking}, #{placeMainImage}, #{listNum})

@@ -22,6 +22,8 @@ import java.util.UUID;
 @Slf4j
 public class PhotoService {
 
+    private static final String ROOTPATH = "C:/mango";
+
     public String savePhoto(MultipartFile file, InternCookie internCookie){
 
 
@@ -58,11 +60,24 @@ public class PhotoService {
         try {
             file.transferTo(saveFile);
 
+
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return uploadFileName+fileExtension;
+    }
+
+    public String updatePhoto(MultipartFile file, InternCookie internCookie, String deleteFileName){
+        String substring = deleteFileName.substring(0, 8);
+        String deletePath = File.separator + substring.substring(0,4) + File.separator + substring.substring(4, 6) + File.separator + substring.substring(6, 8);
+
+        File deleteFile = new File(ROOTPATH + deletePath + File.separator + deleteFileName);
+        log.error("deleteFile = {}", deleteFile);
+        deleteFile.delete();
+        String path = savePhoto(file, internCookie);
+
+        return path;
     }
 }

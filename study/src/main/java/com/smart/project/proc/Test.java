@@ -41,6 +41,7 @@ public interface Test {
 	void deleteList(int num);
 	void updateList(ListVO listVO);
 	void updateMainImage(MainImageVO mainImageVO);
+	MainImageVO selectMainImageListNum(int listNum);
 
 
 
