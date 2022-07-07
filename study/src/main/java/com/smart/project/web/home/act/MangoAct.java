@@ -126,6 +126,7 @@ public class MangoAct {
 
     @RequestMapping("/kakaoLogout")
     public String kakaoLogout(){
+
         return "redirect:https://kauth.kakao.com/oauth/logout?client_id=9b950cc68d2820a3e85047db80f55d96&logout_redirect_uri=http://localhost";
 
     }
