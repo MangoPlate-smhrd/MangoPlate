@@ -21,6 +21,7 @@ export default class BridgeAgent{
 					appProvider : this.dataArray[1] === 'a' ? this.dataArray[6] : 'appstore'
 				}
 			}
+			let _ = require("lodash");
 		}
 	}
 

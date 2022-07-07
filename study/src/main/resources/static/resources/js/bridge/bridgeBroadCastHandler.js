@@ -16,6 +16,7 @@ export default class BridgeBroadCastHandler extends pageManager{
 			param : "broadCastParam",
 			target : "broadCast",
 		};
+		let _ = require("lodash");
 	}
 
 	/**********************************************************************************************

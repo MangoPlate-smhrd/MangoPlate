@@ -12,6 +12,7 @@ class BridgeBroadCast {
 
 	constructor() {
 		this.broadCastArray = {};
+		let _ = require("lodash");
 	}
 
 	run(type, param) {

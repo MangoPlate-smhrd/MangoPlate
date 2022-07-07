@@ -12,6 +12,7 @@ export default class BridgeWebRequest extends BridgeSupport{
 	constructor(){
 		// console.log("bridge Web Filter constructor");
 		super();
+		let _ = require("lodash");
     }
 
 	/**********************************************************************************************
