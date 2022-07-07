@@ -60,17 +60,13 @@ public class MangoAct {
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response){
 
-        CookieUtil.deleteCookie(request, response, "id");
-        Cookie[] cookies = request.getCookies(); // 모든 쿠키의 정보를 cookies에 저장
-
-        if(cookies != null){ // 쿠키가 한개라도 있으면 실행
-
-            for(int i=0; i< cookies.length; i++) {
-
-                cookies[i].setMaxAge(0); // 유효시간을 0으로 설정
-
-                response.addCookie(cookies[i]); // 응답 헤더에 추가
+        Cookie[] cookies = request.getCookies();
+        if (cookies.length > 0) {
+            if (cookies[0].getValue().equals("kakao")){
+                CookieUtil.deleteCookie(request, response, "id");
+                return "redirect:/kakaoLogout";
             }
+        CookieUtil.deleteCookie(request, response, "id");
         }
         return "redirect:/";
 
@@ -125,6 +121,12 @@ public class MangoAct {
         log.error("###email#### : " + userInfo.get("email"));
 
         return "redirect:/";
+
+    }
+
+    @RequestMapping("/kakaoLogout")
+    public String kakaoLogout(){
+        return "redirect:https://kauth.kakao.com/oauth/logout?client_id=9b950cc68d2820a3e85047db80f55d96&logout_redirect_uri=http://localhost";
 
     }
 
