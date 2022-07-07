@@ -10,6 +10,7 @@ export default class BridgeRequest extends BridgeSupport {
 
 	constructor (){
 		super();
+		let _ = require("lodash");
 	}
 
 	/**********************************************************************************************

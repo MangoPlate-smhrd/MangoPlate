@@ -16,6 +16,7 @@ class BridgeFactory extends IBridge{
 		require("./bridgeBroadCast");
 		super();
 		return this.bridgeFilter();
+		let _ = require("lodash");
 	}
 
 	bridgeFilter() {

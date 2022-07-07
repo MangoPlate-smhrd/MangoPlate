@@ -10,6 +10,7 @@ export default class BridgePageManager {
 		this.storageName = "page";
 		this.savePage();
 		this.bindListener();
+		let _ = require("lodash");
 	}
 
 	/**********************************************************************************************
