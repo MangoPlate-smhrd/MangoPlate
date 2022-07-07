@@ -3,7 +3,7 @@ package com.smart.project.web.vo;
 import lombok.Data;
 
 @Data
-public class PlaceVO {
+public class ProductVO {
     private int placeNum;
     private String placeName;
     private String placeAddr;

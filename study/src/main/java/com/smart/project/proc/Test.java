@@ -6,7 +6,8 @@ import com.smart.project.web.home.vo.JoinVO;
 import com.smart.project.web.home.vo.StudyTestVO;
 import com.smart.project.web.home.vo.TestVO;
 import com.smart.project.web.vo.ListVO;
-import com.smart.project.web.vo.PlaceVO;
+import com.smart.project.web.vo.MainImageVO;
+import com.smart.project.web.vo.ProductVO;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.stereotype.Component;
 
@@ -27,12 +28,20 @@ public interface Test {
 
 	List<ListVO> selectAllList();
 
-	List<PlaceVO> selectAllPlace(int num);
-	PlaceVO selectPlace(int num);
+	ListVO selectList(int num);
 
-	void insertPlace(PlaceVO placeVO);
+	List<ProductVO> selectAllCategoryProduct(int num);
+	ProductVO selectProduct(int num);
+
+	void insertPlace(ProductVO productVO);
 
 	void insertList(ListVO listVO);
+	void insertMainImage(ListVO listVO);
+	void deleteMainImage(int num);
+	void deleteList(int num);
+	void updateList(ListVO listVO);
+	void updateMainImage(MainImageVO mainImageVO);
+
 
 
 }

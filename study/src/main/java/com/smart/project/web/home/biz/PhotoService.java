@@ -1,9 +1,11 @@
 package com.smart.project.web.home.biz;
 
+import com.smart.project.common.vo.InternCookie;
 import com.smart.project.proc.Test;
 import com.smart.project.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,33 +22,39 @@ import java.util.UUID;
 @Slf4j
 public class PhotoService {
 
-    public String savePhoto(MultipartFile file, String path){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    public String savePhoto(MultipartFile file, InternCookie internCookie){
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         Calendar c1 = Calendar.getInstance();
 
-
         String strToday = sdf.format(c1.getTime());
-
-
         String fileRealName = file.getOriginalFilename();
         String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-        String uploadFolder = "C:/mango/"+strToday+path+"/";
-        String dbFolder = "/image/"+path+"/";
+        String path = File.separator + strToday.substring(0,4) + File.separator + strToday.substring(4, 6) + File.separator + strToday.substring(6, 8);
+        String uploadFolder = "C:/mango"+path+File.separator;
+        String folderPath = "C:/mango"+path;
         log.error("파일 이름 : {}", fileRealName);
         log.error("파일 확장자 : {}", fileExtension);
         log.error("파일 폴더 : {}", uploadFolder);
 
-        UUID uuid = UUID.randomUUID();
-        System.out.println(uuid.toString());
-        String[] uuids = uuid.toString().split("-");
+        String uuid = UUID.randomUUID().toString();
 
-        String uniqueName = uuids[0];
-        System.out.println("생성된 고유문자열 : " + uniqueName);
+        String uploadFileName = strToday + "_" + internCookie.getName() + "_" + uuid.split("-")[0];
+
+        System.out.println("파일 이름 : " + uploadFileName);
         System.out.println("확장자명 : " + fileExtension);
 
-        //File folder = new File(uploadFolder+"\\"+form.getUserId());
-        File saveFile = new File(uploadFolder+strToday+fileExtension);  // 적용 후
+        File folder = new File(folderPath);
+        if(!folder.exists()){
+            try{
+                folder.mkdir();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
+        }
+        File saveFile = new File(uploadFolder+uploadFileName+fileExtension);  // 적용 후
         try {
             file.transferTo(saveFile);
 
@@ -55,6 +63,6 @@ public class PhotoService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return dbFolder+strToday+fileExtension;
+        return uploadFileName+fileExtension;
     }
 }

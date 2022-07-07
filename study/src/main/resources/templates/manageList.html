@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layoutContents.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content" class="pc__container">
+    <div th:replace="/fragments/header :: header"></div>
+    <main>
+        <section class="py-3 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">현재 리스트</h1>
+                    <p class="lead text-muted">mango plate 모방 스터디 입니다.</p>
+                </div>
+            </div>
+        </section>
+        <div class="album py-1 bg-danger">
+            <div class="container">
+                <div class="row mb-2">
+                    <a class="btn" id="insertList">리스트 삽입</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row mb-2">
+                    <th:block th:each="list : ${allList}">
+                        <div class="col-2">
+                            <h1 th:text="${list.getListNum()}"></h1>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                <div class="p-5 d-flex flex-column position-static">
+                                    <div style="float: left; width: 100px; height: 100px">
+                                        <img style="width: 100%" th:src="@{${list.getMainImageName()}}"/>
+                                    </div>
+                                    <div style="float: left; width: 33%;">
+                                        <h3 th:text="${list.getListName()}">Featured post</h3>
+                                        <h3 th:text="${list.getListIntro()}" class="mb-1 text-muted">Nov 12</h3>
+                                    </div>
+
+                                    <!--/* <a class="btn deleteList">리스트 삭제</a>
+                                    <a class="btn" id="updateList">리스트 수정</a>
+                                    */-->
+                                </div>
+                                <form action="/manageList/updateList" method="post">
+                                    <input type="hidden" th:name="listNum" th:value="${list.getListNum()}"/>
+                                    <input type="submit" class="btn col-md-12" th:value="'리스트 수정'">
+                                </form>
+                                <form action="/manageList/deleteList" method="post">
+                                    <input type="hidden" th:name="listNum" th:value="${list.getListNum()}"/>
+                                    <input type="submit" class="btn col-md-12" th:value="'리스트 삭제'">
+                                </form>
+                                <form action="/manageList/updateMainImage" method="post">
+                                    <input type="hidden" th:name="listNum" th:value="${list.getListNum()}"/>
+                                    <input type="submit" class="btn col-md-12" th:value="'대표이미지 수정'">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-2">
+
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        $(document).ready(function () {
+            $("#insertList").on("click", function (e) {
+                location.href = "/manageList/insertList";
+            });
+            $("#updateList").on("click", function (e) {
+                location.href = "updateList";
+            });
+            /* 삭제 버튼 */
+        })
+
+    </script>
+</div>
+</body>
+</html>
