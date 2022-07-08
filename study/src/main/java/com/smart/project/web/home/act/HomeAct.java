@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ import java.util.Map;
 public class HomeAct {
     private final HomeService homeService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index(Model model, HttpServletRequest request) throws Exception {
         List<ListVO> lists = homeService.selectAllList();
         model.addAttribute("lists", lists);
@@ -37,7 +38,7 @@ public class HomeAct {
         return "index";
     }
 
-    @RequestMapping("/lists/{param}")
+    @GetMapping("/lists/{param}")
     public String lists(@PathVariable int param, Model model, HttpServletRequest request){
         List<ProductVO> product = homeService.selectAllCategoryProduct(param);
         model.addAttribute("places", product);
@@ -49,7 +50,7 @@ public class HomeAct {
 
 
 
-    @RequestMapping("/product/{param}")
+    @GetMapping("/product/{param}")
     public String product(@PathVariable int param,Model model, HttpServletRequest request){
         ProductVO product = homeService.selectProduct(param);
         model.addAttribute("place", product);
