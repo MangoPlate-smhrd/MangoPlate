@@ -10,19 +10,24 @@
 </head>
 <body>
 <div layout:fragment="content" class="pc__container">
-    <form th:object="${lists}" name="lists" action="/manageList/insertList" method="post" enctype="multipart/form-data">
+    <form th:object="${listVO}" name="lists" action="/manageList/insertList" method="post" enctype="multipart/form-data">
         <div>
             <label for="listName">카테고리 이름</label>
-            <input type="text" th:field="*{listName}" class="form-control" placeholder="이름을 입력하세요"/>
+            <input type="text" th:field="*{listName}" class="form-control" placeholder="상풍명을 입력하세요"/>
+            <div th:errors="*{listName}">상품명</div>
         </div>
         <div>
             <label for="listIntro">카테고리 설명</label>
             <input type="text" th:field="*{listIntro}" class="form-control" placeholder="설명을 입력하세요"/>
+            <div th:errors="*{listIntro}">상품명</div>
         </div>
 
         <ul>
             <li>이미지 파일 <input type="file" name="file"></li>
         </ul>
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+        </div>
         <input th type="submit"/>
     </form>
 </div>
