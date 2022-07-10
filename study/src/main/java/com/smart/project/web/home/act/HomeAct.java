@@ -3,14 +3,13 @@ package com.smart.project.web.home.act;
 import com.smart.project.util.ClientUtil;
 import com.smart.project.web.home.biz.HomeService;
 import com.smart.project.web.vo.ListVO;
-import com.smart.project.web.vo.ProductVO;
+import com.smart.project.web.vo.PlaceVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -39,7 +38,7 @@ public class HomeAct {
 
     @RequestMapping("/lists/{param}")
     public String lists(@PathVariable int param, Model model, HttpServletRequest request){
-        List<ProductVO> product = homeService.selectAllCategoryProduct(param);
+        List<PlaceVO> product = homeService.selectAllCategoryProduct(param);
         model.addAttribute("places", product);
         log.error("lists act");
         log.error("lists url : {}", request.getRequestURI());
@@ -51,7 +50,7 @@ public class HomeAct {
 
     @RequestMapping("/product/{param}")
     public String product(@PathVariable int param,Model model, HttpServletRequest request){
-        ProductVO product = homeService.selectProduct(param);
+        PlaceVO product = homeService.selectProduct(param);
         model.addAttribute("place", product);
         log.error("lists act");
         log.error("lists url : {}", request.getRequestURI());

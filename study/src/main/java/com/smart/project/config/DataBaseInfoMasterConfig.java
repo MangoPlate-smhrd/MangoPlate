@@ -1,9 +1,11 @@
 package com.smart.project.config;
 
 import com.smart.project.annotation.Master;
+import com.smart.project.annotation.Master2;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -23,7 +25,6 @@ import javax.sql.DataSource;
 public class DataBaseInfoMasterConfig extends HikariConfig{
 
     String mapperLocation = "mapper/*.xml";
-
 
     @Bean(name = "masterDataSource", destroyMethod = "close")
     public HikariDataSource masterDataSource() {

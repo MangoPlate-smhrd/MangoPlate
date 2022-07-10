@@ -1,14 +1,14 @@
 package com.smart.project.web.home.act;
 
 import com.smart.project.common.vo.InternCookie;
+import com.smart.project.proc.Place;
 import com.smart.project.util.ClientUtil;
-import com.smart.project.util.CookieUtil;
-import com.smart.project.util.ImageUtil;
 import com.smart.project.web.home.biz.HomeService;
 import com.smart.project.web.home.biz.PhotoService;
 import com.smart.project.web.home.biz.PlaceService;
 import com.smart.project.web.vo.ListVO;
-import com.smart.project.web.vo.ProductVO;
+import com.smart.project.web.vo.MainImageVO;
+import com.smart.project.web.vo.PlaceVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -18,14 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +30,7 @@ public class PhotoAct {
     public final HomeService homeService;
     public final PhotoService photoService;
     public final PlaceService placeService;
+    public final Place place;
 
 //    final int[] PHOTO_HEIGHT = {200, 300, 600, 900};
 //    final int[] PHOTO_WIDTH = {200, 400, 800, 1200};
@@ -45,18 +39,28 @@ public class PhotoAct {
     public String photo(Model model){
         List<ListVO> listVOS = homeService.selectAllList();
         model.addAttribute("list", listVOS);
-        model.addAttribute("place", new ProductVO());
+        model.addAttribute("place", new PlaceVO());
         return "photo";
     }
 
     @RequestMapping("/upload")
-    public String saveFile(@RequestParam("file") MultipartFile file, @RequestParam("category") int category,@ModelAttribute ProductVO productVO, HttpServletRequest request, InternCookie internCookie) throws Exception {
+    public String saveFile(@RequestParam("file") MultipartFile file, @RequestParam("category") int category, @ModelAttribute PlaceVO placeVO, HttpServletRequest request, InternCookie internCookie) throws Exception {
 
         String path = photoService.savePhoto(file, internCookie);
-        productVO.setListNum(category);
-        productVO.setPlaceMainImage(path);
-        placeService.insertPlace(productVO);
-        log.error("productVO : {}", productVO);
+        placeVO.setListNum(category);
+        int cnt = place.insertPlace(placeVO);
+        if (cnt > 0){
+            if (place.selectPlaceNum().size() > 0) {
+                int placeNum = place.selectPlaceNum().get(0).getPlaceNum();
+                MainImageVO vo = new MainImageVO(0, path, 0, placeNum);
+                place.insertMainImage(vo);
+            }
+        }
+
+
+
+
+        log.error("productVO : {}", placeVO);
 
         return "redirect:/admin";
     }

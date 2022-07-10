@@ -50,7 +50,7 @@ public class PhotoService {
         File folder = new File(folderPath);
         if(!folder.exists()){
             try{
-                folder.mkdir();
+                folder.mkdirs();
             }catch (Exception e){
                 e.printStackTrace();
             }
