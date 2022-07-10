@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smart.project.proc.Place" >
+    <select id="selectAllPlace" parameterType="com.smart.project.web.vo.PlaceVO" resultType="com.smart.project.web.vo.PlaceVO">
+        select * from place;
+    </select>
+
+    <insert id="insertMainImage" parameterType="com.smart.project.web.vo.MainImageVO">
+        insert into mainImage values (null, #{mainImageName}, null, #{placeNum});
+    </insert>
+
+    <insert id="insertPlace" parameterType="com.smart.project.web.vo.PlaceVO">
+        insert into place values (null, #{placeName}, #{placeAddr}, #{placePhone}, #{placeParking}, #{listNum})
+    </insert>
+
+    <select id="selectPlaceNum" resultType="com.smart.project.web.vo.PlaceVO">
+        select * from place ORDER BY place_num DESC;
+    </select>
+
+
+
+</mapper>
