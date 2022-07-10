@@ -1,11 +1,11 @@
 package com.smart.project.web.vo;
 
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
 @RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class MainImageVO {
     private int mainImageNum;
     private String mainImageName;

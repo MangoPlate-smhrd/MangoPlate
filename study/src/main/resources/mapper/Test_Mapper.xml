@@ -20,11 +20,11 @@
         select a.list_num as list_num, list_name, list_intro, mainImage_name from list a left join mainImage b on a.list_num = b.list_num where a.list_num = #{num};
     </select>
 
-    <select id="selectAllCategoryProduct" resultType="com.smart.project.web.vo.ProductVO">
+    <select id="selectAllCategoryProduct" resultType="com.smart.project.web.vo.PlaceVO">
         select * from place where list_num in(#{num});
     </select>
 
-    <select id="selectProduct" resultType="com.smart.project.web.vo.ProductVO">
+    <select id="selectProduct" resultType="com.smart.project.web.vo.PlaceVO">
         select * from place where place_num in(#{num});
     </select>
 
@@ -57,7 +57,7 @@
     </select>
 
 
-    <insert id="insertPlace" parameterType="com.smart.project.web.vo.ProductVO">
+    <insert id="insertPlace" parameterType="com.smart.project.web.vo.PlaceVO">
         insert into place values (null, #{placeName}, #{placeAddr}, #{placePhone}, #{placeParking}, #{placeMainImage}, #{listNum})
     </insert>
 
