@@ -35,7 +35,8 @@
                                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                     <div class="p-4 d-flex flex-column position-static">
                                         <div style="float: left; width: 100px; height: 100px">
-                                            <img style="width: 100%" th:src="@{${place.getPlaceMainImage()}}"/>
+                                            <!-- place > mainImage 컬럼 삭제-->
+<!--                                            <img style="width: 100%" th:src="@{${place.getPlaceMainImage()}}"/>-->
                                         </div>
                                         <div style="float: left; width: 33%;">
                                             <h3 th:text="${place.getPlaceName()}">Featured post</h3>
