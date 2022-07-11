@@ -3,14 +3,12 @@ package com.smart.project.web.home.biz;
 import com.smart.project.proc.Test;
 import com.smart.project.web.vo.ListVO;
 import com.smart.project.web.vo.MainImageVO;
-import com.smart.project.web.vo.ProductVO;
-import javafx.scene.input.DataFormat;
+import com.smart.project.web.vo.PlaceVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -48,8 +46,8 @@ public class HomeService {
     }
 
 
-    public List<ProductVO> selectAllCategoryProduct(int num){
-        List<ProductVO> vo = test.selectAllCategoryProduct(num);
+    public List<PlaceVO> selectAllCategoryProduct(int num){
+        List<PlaceVO> vo = test.selectAllCategoryProduct(num);
         return vo;
     }
 
@@ -84,8 +82,8 @@ public class HomeService {
 
 
 
-    public ProductVO selectProduct(int num){
-        ProductVO vo = test.selectProduct(num);
+    public PlaceVO selectProduct(int num){
+        PlaceVO vo = test.selectProduct(num);
         return vo;
     }
 
