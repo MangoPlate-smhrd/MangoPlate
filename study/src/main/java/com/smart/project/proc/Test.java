@@ -36,7 +36,7 @@ public interface Test {
 	void insertPlace(ProductVO productVO);
 
 	void insertList(ListVO listVO);
-	void insertMainImage(ListVO listVO);
+	void insertMainImage(MainImageVO mainImageVO);
 	void deleteMainImage(int num);
 	void deleteList(int num);
 	void updateList(ListVO listVO);

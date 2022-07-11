@@ -3,7 +3,8 @@ package com.smart.project.web.home.act;
 import com.smart.project.common.vo.InternCookie;
 import com.smart.project.web.home.biz.HomeService;
 import com.smart.project.web.home.biz.PhotoService;
-import com.smart.project.web.home.validator.ManageListValidator;
+import com.smart.project.web.home.validate.form.ListVOInsertForm;
+import com.smart.project.web.home.validate.form.ListVOUpdateForm;
 import com.smart.project.web.vo.ListVO;
 import com.smart.project.web.vo.MainImageVO;
 import lombok.RequiredArgsConstructor;
@@ -30,12 +31,7 @@ import java.util.Map;
 public class ManageList {
     private final HomeService homeService;
     private final PhotoService photoService;
-    private final ManageListValidator manageListValidator;
 
-    @InitBinder
-    public void init(WebDataBinder webDataBinder){
-        webDataBinder.addValidators(manageListValidator);
-    }
     @GetMapping("")
     public String manageListHome(Model model){
         List<ListVO> allList = homeService.selectAllList();
@@ -54,13 +50,13 @@ public class ManageList {
     }
 
     @PostMapping(value="/insertList")
-    public String manageListInsert(Model model, @Validated @ModelAttribute ListVO listVO, BindingResult bindingResult, @RequestParam("file") MultipartFile file, InternCookie internCookie){
+    public String manageListInsert(Model model, @Validated @ModelAttribute("listVO") ListVOInsertForm form, BindingResult bindingResult, @RequestParam("file") MultipartFile file, InternCookie internCookie){
 
         //Map<String, String> errors = new HashMap<>();
 
         if(file.isEmpty()){
             //errors.put("listMainImage", "대표이미지는 필수입니다");
-            //bindingResult.addError(new ObjectError("listVO", "대표이미지는 필수입니다."));
+            //bindingResult.addError(new ObjectError("form", "대표이미지는 필수입니다."));
             bindingResult.reject("file");
         }
 
@@ -70,10 +66,16 @@ public class ManageList {
         }
 
         String fileName = photoService.savePhoto(file, internCookie);
-        listVO.setMainImageName(fileName);
+
+        form.setMainImageName(fileName);
+
+        ListVO listVO = new ListVO(form.getListName(), form.getListIntro());
+        MainImageVO mainImageVO = new MainImageVO();
+        mainImageVO.setMainImageName(form.getMainImageName());
+
 
         homeService.insertList(listVO);
-        homeService.insertMainImage(listVO);
+        homeService.insertMainImage(mainImageVO);
         return "redirect:/manageList";
     }
 
@@ -83,12 +85,24 @@ public class ManageList {
      *  */
     @GetMapping("/{listNum}/updateList")
     public String manageUpdateListHome(@PathVariable int listNum, Model model){
-        model.addAttribute("lists", homeService.selectList(listNum));
+        model.addAttribute("listVO", homeService.selectList(listNum));
+        log.error("updateform");
         return "updateList";
     }
 
-    @PostMapping(value="/updateList", params="listName")
-    public String manageUpdateList(@ModelAttribute ListVO listVO){
+    @PostMapping(value="/{listNum}/updateList")
+    public String manageUpdateList(@PathVariable int listNum, @Validated @ModelAttribute("listVO") ListVOUpdateForm form, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            log.error("errors : {}", bindingResult);
+            return "updateList";
+        }
+
+        ListVO listVO = new ListVO();
+        listVO.setListNum(listNum);
+        listVO.setListName(form.getListName());
+        listVO.setListIntro(form.getListIntro());
+
         homeService.updateList(listVO);
         return "redirect:/manageList";
     }
@@ -99,10 +113,20 @@ public class ManageList {
         return "updateMainImage";
     }
 
-    @PostMapping(value = "/updateMainImage", params = "mainImageNum")
-    public String manageUpdateMainImage(@RequestParam("file") MultipartFile file, @RequestParam int listNum, @ModelAttribute MainImageVO mainImageVO, InternCookie internCookie){
+    @PostMapping(value = "/{listNum}/updateMainImage")
+    public String manageUpdateMainImage(@RequestParam("file") MultipartFile file, @PathVariable int listNum, @ModelAttribute MainImageVO mainImageVO, BindingResult bindingResult, InternCookie internCookie){
 
-        log.error("mainImageNum : {}", mainImageVO);
+        if(file.isEmpty()){
+            //errors.put("listMainImage", "대표이미지는 필수입니다");
+            //bindingResult.addError(new ObjectError("form", "대표이미지는 필수입니다."));
+            bindingResult.reject("file");
+        }
+
+        if(bindingResult.hasErrors()){
+            log.error("errors : {}", bindingResult);
+            return "updateMainImage";
+        }
+
         String selectMainImageNameListNum = homeService.selectMainImageNameListNum(listNum);
         String fileName = photoService.updatePhoto(file, internCookie, selectMainImageNameListNum);
         mainImageVO.setMainImageName(fileName);

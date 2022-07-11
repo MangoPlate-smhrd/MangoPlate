@@ -34,11 +34,12 @@ public class PhotoService {
         String fileRealName = file.getOriginalFilename();
         String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
         String path = File.separator + strToday.substring(0,4) + File.separator + strToday.substring(4, 6) + File.separator + strToday.substring(6, 8);
-        String uploadFolder = "C:/mango"+path+File.separator;
-        String folderPath = "C:/mango"+path;
+
+        String folderPath = ROOTPATH+path+File.separator;
+
         log.error("파일 이름 : {}", fileRealName);
         log.error("파일 확장자 : {}", fileExtension);
-        log.error("파일 폴더 : {}", uploadFolder);
+        log.error("파일 폴더 : {}", folderPath);
 
         String uuid = UUID.randomUUID().toString();
 
@@ -50,17 +51,16 @@ public class PhotoService {
         File folder = new File(folderPath);
         if(!folder.exists()){
             try{
-                folder.mkdir();
+                log.info("폴더생성됨 : {}", folder.getPath());
+                folder.mkdirs();
             }catch (Exception e){
                 e.printStackTrace();
             }
 
         }
-        File saveFile = new File(uploadFolder+uploadFileName+fileExtension);  // 적용 후
+        File saveFile = new File(folderPath+uploadFileName+fileExtension);  // 적용 후
         try {
             file.transferTo(saveFile);
-
-
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (IOException e) {

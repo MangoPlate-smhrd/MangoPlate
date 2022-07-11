@@ -24,14 +24,7 @@ public class HomeService {
         if(vo != null){
             for (ListVO listVO :
                     vo) {
-                if(listVO.getMainImageName() != null){
-                    String mainImageName = listVO.getMainImageName();
-                    if(mainImageName.split("_")[0].length() == 8){
-                        String s = mainImageName.split("_")[0];
-                        String path = File.separator + s.substring(0,4) + File.separator + s.substring(4, 6) + File.separator + s.substring(6, 8);
-                        listVO.setMainImageName("/image"+path + File.separator + mainImageName);
-                    }
-                }
+                extracted(listVO);
             }
         }
         return vo;
@@ -39,6 +32,11 @@ public class HomeService {
 
     public ListVO selectList(int num){
         ListVO listVO = test.selectList(num);
+        extracted(listVO);
+        return listVO;
+    }
+
+    private void extracted(ListVO listVO) {
         if(listVO.getMainImageName() != null){
             String mainImageName = listVO.getMainImageName();
             if(mainImageName.split("_")[0].length() == 8){
@@ -47,8 +45,8 @@ public class HomeService {
                 listVO.setMainImageName("/image"+path + File.separator + mainImageName);
             }
         }
-        return listVO;
     }
+
 
     public List<ProductVO> selectAllCategoryProduct(int num){
         List<ProductVO> vo = test.selectAllCategoryProduct(num);
@@ -59,8 +57,8 @@ public class HomeService {
         test.insertList(listVO);
     }
 
-    public void insertMainImage(ListVO listVO){
-        test.insertMainImage(listVO);
+    public void insertMainImage(MainImageVO mainImageVO){
+        test.insertMainImage(mainImageVO);
     }
 
     public void deleteMainImage(int num){

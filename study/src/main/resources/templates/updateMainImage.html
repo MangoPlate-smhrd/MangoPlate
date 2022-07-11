@@ -10,13 +10,14 @@
 </head>
 <body>
 <div layout:fragment="content" class="pc__container">
-    <form th:object="${mainImageVO}" action="/manageList/updateMainImage" method="post" enctype="multipart/form-data">
+    <form th:object="${mainImageVO}" th:action method="post" enctype="multipart/form-data">
         <ul>
             <li>이미지 파일 <input type="file" id="file" name="file"></li>
             <li><input type="submit"/></li>
         </ul>
-        <input type="hidden" th:field="*{listNum}"/>
-        <input type="hidden" th:field="*{mainImageNum}"/>
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+        </div>
     </form>
 </div>
 </body>

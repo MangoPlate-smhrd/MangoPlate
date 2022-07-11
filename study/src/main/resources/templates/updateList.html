@@ -10,15 +10,16 @@
 </head>
 <body>
 <div layout:fragment="content" class="pc__container">
-    <form th:object="${lists}" name="lists" action="/manageList/updateList" method="post">
-        <input type="hidden" th:field="*{listNum}"/>
+    <form th:object="${listVO}" name="listVO" th:action method="post">
         <div>
             <label for="listName">카테고리 이름</label>
             <input type="text" th:field="*{listName}" class="form-control" placeholder="이름을 입력하세요"/>
+            <div th:errors="*{listName}">상품명</div>
         </div>
         <div>
             <label for="listIntro">카테고리 설명</label>
             <input type="text" th:field="*{listIntro}" class="form-control" placeholder="설명을 입력하세요"/>
+            <div th:errors="*{listIntro}">상품명</div>
         </div>
         <input type="submit" th:value="수정"/>
     </form>
