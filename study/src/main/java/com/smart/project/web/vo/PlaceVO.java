@@ -10,4 +10,6 @@ public class PlaceVO {
     private String placePhone;
     private String placeParking;
     private int listNum;
+
+    private String MainImageName;
 }

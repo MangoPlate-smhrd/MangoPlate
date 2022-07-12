@@ -1,7 +1,7 @@
 package com.smart.project.web.home.act;
 
 import com.smart.project.common.vo.InternCookie;
-import com.smart.project.proc.Place;
+
 import com.smart.project.util.ClientUtil;
 import com.smart.project.web.home.biz.HomeService;
 import com.smart.project.web.home.biz.PhotoService;
@@ -26,6 +26,8 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class PhotoAct {
+
+    /*
 
     public final HomeService homeService;
     public final PhotoService photoService;
@@ -73,6 +75,8 @@ public class PhotoAct {
         model.addAttribute("id", id);
 
     }
+
+    */
 
 //    @RequestMapping("/seq")
 //    public void seq(){

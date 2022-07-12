@@ -1,15 +1,11 @@
 package com.smart.project.web.vo;
 
 
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.lang.Nullable;
 
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 @NoArgsConstructor
 public class MainImageVO {
     private int mainImageNum;
